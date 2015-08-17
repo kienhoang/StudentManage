@@ -7,7 +7,7 @@ private :
 	int code_;
 	Student *next_;
 public:
-	Student(std::string name="",int code=0);
+	Student();
 	~Student();
 	void setName(std::string name);
 	std::string getName();
@@ -19,4 +19,6 @@ public:
 	Student *LastPoint();
 	int AddStudent(std::string name, int code);
 	Student * FindCode(int code);
+	Student * FindName(std::string name);
+	int DeleteStudent(Student * p);
 };

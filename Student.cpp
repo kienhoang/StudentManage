@@ -1,8 +1,8 @@
 #include "Student.h"
 
-Student::Student(std::string name, int code){
-	name_ = name;
-	code_ = code;
+Student::Student(){
+	name_ = "";
+	code_ = 0;
 	next_ = 0;
 }
 Student::~Student(){
@@ -50,7 +50,10 @@ int Student::AddStudent(std::string name, int code) {
 			return 0;
 		}
 		else {
-			Student * n = new Student(name, code);
+			Student * n = new Student;
+			n->setName(name);
+			n->setCode(code);
+
 			p->setNext(n);
 			p = n;
 			if (n != 0) {
@@ -91,4 +94,64 @@ Student * Student::FindCode(int code){
 	else {
 		return 0;
 	}
+}
+Student * Student::FindName(std::string name) {
+	Student * first = new Student;
+	Student * p = this;
+	while (true) {
+		if (p->getNext() != 0) {
+			if (p->getName().compare(name) == 0) {
+				first->AddStudent(name, p->getCode());
+			}
+			p = p->getNext();
+		}
+		else {
+			if (p->getName().compare(name) == 0) {
+				first->AddStudent(name, p->getCode());
+			}
+			break;
+		}
+	}
+	if (first->getName().compare("") == 0 && first->getCode() == 0) {
+		return 0;
+	}
+	else {
+		return first;
+	}
+}
+int Student::DeleteStudent(Student * p) {
+	if (p == this) {
+		if (p->getNext() != 0) {
+			p->setName(p->getNext()->getName());
+			p->setCode(p->getNext()->getCode());
+			Student *tmp = p->getNext();
+			p->setNext(p->getNext()->getNext());
+			delete tmp;
+		}
+		else {
+			p->setName("");
+			p->setCode(0);
+			p->setNext(0);
+		}
+	}
+	else {
+		if (p == LastPoint()) {
+			Student * before = this;
+			while (before->getNext() != p) {
+				before = before->getNext();
+			}
+			delete p;
+			before->setNext(0);
+		}
+		else {
+			Student * before = this;
+			while (before->getNext() != p) {
+				before = before->getNext();
+			}
+			Student * after = p->getNext();
+			before->setNext(after);
+			delete p;
+		}
+	}
+	return 0;
 }
