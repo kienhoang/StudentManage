@@ -6,8 +6,6 @@ int main() {
 	first.AddStudent("Hoang Kien", 20142397);
 	first.AddStudent("Nguyen Nhai", 20143274);
 	first.AddStudent("Hoang Kien", 1234);
-	Student *p = 0;
-	p = first.FindCode(1234);
-	first.DeleteStudent(p);
+	first.ImportFromFile("List.txt");
  	return 0;
 }

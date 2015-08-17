@@ -8,6 +8,7 @@ Student::Student(){
 Student::~Student(){
 }
 void Student::setName(std::string name) {
+	NameProcess(name);
 	name_ = name;
 }
 std::string Student::getName() {
@@ -39,6 +40,7 @@ Student *Student::LastPoint() {
 	}
 }
 int Student::AddStudent(std::string name, int code) {
+	NameProcess(name);
 	if (FindCode(code) != 0) {
 		return -1;
 	}
@@ -96,6 +98,7 @@ Student * Student::FindCode(int code){
 	}
 }
 Student * Student::FindName(std::string name) {
+	NameProcess(name);
 	Student * first = new Student;
 	Student * p = this;
 	while (true) {
@@ -154,4 +157,70 @@ int Student::DeleteStudent(Student * p) {
 		}
 	}
 	return 0;
+}
+void Student::Release() {
+	Student * p = this->getNext();
+	while (true)
+	{
+		if (p->getNext() != 0) {
+			Student *n = p->getNext();
+			delete p;
+			p = n;
+		}
+		else {
+			delete p;
+			break;
+		}
+	}
+	this->setName("");
+	this->setCode(0);
+	this->setNext(0);
+}
+int Student::SaveToFile(std::string fname) {
+	std::fstream f;
+	f.open(fname, std::ios::out);
+	if (f.fail()) {
+		return -1;
+	}
+	else {
+		Student *p = this;
+		while (true)
+		{
+			if (p->getNext() != 0) {
+				f << p->getName() << std::endl;
+				f << p->getCode() << std::endl;
+				p = p->getNext();
+			}
+			else {
+				f << p->getName() << std::endl;
+				f << p->getCode() << std::endl;
+				break;
+			}
+		}
+		f.close();
+		return 0;
+	}
+}
+int Student::AddFromFile(std::string fname) {
+	std::fstream f;
+	f.open(fname, std::ios::in);
+	if (f.fail()) {
+		return -1;
+	}
+	else {
+		std::string name = "", scode = "";
+		int code = 0;
+		Student * p = this;
+		while (std::getline(f,name)){
+			std::getline(f, scode);
+			code = StringToInt(scode);
+			AddStudent(name, code);
+		}
+	}
+	f.close();
+	return 0;
+}
+int Student::ImportFromFile(std::string fname) {
+	Release();
+	return AddFromFile(fname);
 }
