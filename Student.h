@@ -27,4 +27,5 @@ public:
 	int SaveToFile(std::string fname);
 	int AddFromFile(std::string fname);
 	int ImportFromFile(std::string fname);
+	void SortList();
 };

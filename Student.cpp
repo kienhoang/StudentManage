@@ -41,7 +41,7 @@ Student *Student::LastPoint() {
 }
 int Student::AddStudent(std::string name, int code) {
 	NameProcess(name);
-	if (FindCode(code) != 0) {
+	if (FindCode(code) != 0 || code <=0 ) {
 		return -1;
 	}
 	else {
@@ -55,7 +55,6 @@ int Student::AddStudent(std::string name, int code) {
 			Student * n = new Student;
 			n->setName(name);
 			n->setCode(code);
-
 			p->setNext(n);
 			p = n;
 			if (n != 0) {
@@ -223,4 +222,35 @@ int Student::AddFromFile(std::string fname) {
 int Student::ImportFromFile(std::string fname) {
 	Release();
 	return AddFromFile(fname);
+}
+void Student::SortList() {
+	Student * p = this;
+	while (p->getNext() != 0) {
+		Student * q = p->getNext();
+		while (true) {
+			if (q->getNext() != 0) {
+				if (q->getName().compare(p->getName()) < 0) {
+					std::string tmp_name = q->getName();
+					q->setName(p->getName());
+					p->setName(tmp_name);
+					int tmp_code = q->getCode();
+					q->setCode(p->getCode());
+					p->setCode(tmp_code);
+				}
+				q = q->getNext();
+			}
+			else {
+				if (q->getName().compare(p->getName()) < 0) {
+					std::string tmp_name = q->getName();
+					q->setName(p->getName());
+					p->setName(tmp_name);
+					int tmp_code = q->getCode();
+					q->setCode(p->getCode());
+					p->setCode(tmp_code);
+				}
+				break;
+			}
+		}
+		p = p->getNext();
+	}
 }
