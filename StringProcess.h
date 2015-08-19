@@ -8,4 +8,5 @@ void Trim(std::string &c);
 void ToLowerString(std::string &c);
 void UpcaseFirstSpace(std::string &c);
 void NameProcess(std::string &c);
-int StringToInt(std::string s);
+int StringToInt(std::string &s);
+bool IsIn(std::string &str, std::string &substr);

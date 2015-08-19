@@ -1,6 +1,6 @@
 #include "StringProcess.h"
 
-void Trim_left(std::string & c)
+void Trim_left(std::string &c)
 {
 	std::string s="";
 	bool t = false;
@@ -56,8 +56,33 @@ void NameProcess(std::string &c) {
 	ToLowerString(c);
 	UpcaseFirstSpace(c);
 }
-int StringToInt(std::string s) {
+int StringToInt(std::string &s) {
 	const char* c_s = s.c_str();
 	return atoi(c_s);
 	delete[] c_s;
+}
+bool IsIn(std::string &str,std::string &substr) {
+	if (substr.length() > str.length()) {
+		return false;
+	}
+	else {
+		int i = 0;
+		bool isTrue = true;
+		while (i <(int) (str.length()-substr.length())) {
+			isTrue = true;
+			for (int j = 0; j <(int) substr.length(); j++) {
+				if (substr[j] != str[i + j]) {
+					isTrue = false;
+					break;
+				}
+			}
+			if (isTrue) {
+				break;
+			}
+			else {
+				i++;
+			}
+		}
+		return isTrue;
+	}
 }
