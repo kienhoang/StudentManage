@@ -1,6 +1,13 @@
 #pragma once
+#include "Student.h"
+#include <iostream>
 
-namespace stdncons {
-	void Menu_console();
+class StudentConsole : public Student {
+public:
+	StudentConsole();
+	~StudentConsole();
+	int Menu_console();
+	int FindMenu_console();
 	void AddStudent_console();
-}
+	void viewlist_console();
+};
