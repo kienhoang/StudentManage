@@ -1,11 +1,15 @@
 #include <iostream>
 #include "Student.h"
+#include "StudentConsole.h"
 
 int main() {	
-	Student list;
-	list.AddStudent("Hoang Kien", 20142397);
-	list.AddStudent("Nguyen Nhai", 20143274);
-	list.AddStudent("Hoang Ha", 20143325);
-	list.SortList();
+	StudentConsole student;
+	student.AddStudent("Hoang Van", "Kien", 20142397);
+	student.AddStudent("Nguyen Thi", "Nhai", 20143274);
+	student.AddStudent("Le Van", "Hoang", 20154236);
+	student.AddStudent_console();
+	student.SortList(1);
+	student.viewlist_console();
+	student.FindName("Hoang");
 	return 0;
 }
