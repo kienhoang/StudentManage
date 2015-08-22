@@ -106,3 +106,12 @@ void Seperate(std::string & name, std::string & firstname, std::string & lastnam
 	}
 	lastname = reserver;
 }
+std::string CharToString(char  ch[]) {
+	std::string s = "";
+	int i = 0;
+	while (ch[i] != 0) {
+		s = s + ch[i];
+		i++;
+	}
+	return s;
+}
