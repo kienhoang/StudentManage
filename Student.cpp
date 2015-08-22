@@ -134,16 +134,18 @@ int Student::DeleteStudent(Student * p) {
 }
 void Student::Release() {
 	Student * p = this->getNext();
-	while (true)
-	{
-		if (p->getNext() != 0) {
-			Student *n = p->getNext();
-			delete p;
-			p = n;
-		}
-		else {
-			delete p;
-			break;
+	if (p != 0) {
+		while (true)
+		{
+			if (p->getNext() != 0) {
+				Student *n = p->getNext();
+				delete p;
+				p = n;
+			}
+			else {
+				delete p;
+				break;
+			}
 		}
 	}
 	this->setName("","");
@@ -355,19 +357,48 @@ Student * Student::FindCode(int code) {
 		return 0;
 	}
 }
-Student * Student::FindName(std::string name) {
+Student * Student::FindName(std::string &name) {
 	NameProcess(name);
 	Student * first = new Student;
 	Student * p = this;
 	while (true) {
 		if (p->getNext() != 0) {
-			if (IsIn(p->getFirstName(), name) || IsIn(p->getLastName(), name)) {
+			if (IsIn(p->getFirstName(), name) || IsIn(p->getLastName(), name)
+				|| IsIn(p->getFirstName()+" "+p->getLastName(),name)) {
 				first->AddStudent(p->getFirstName(), p->getLastName(), p->getCode());
 			}
 			p = p->getNext();
 		}
 		else {
-			if (IsIn(p->getFirstName(), name) || IsIn(p->getLastName(), name)) {
+			if (IsIn(p->getFirstName(), name) || IsIn(p->getLastName(), name) 
+				|| IsIn(p->getFirstName() + " " + p->getLastName(), name)) {
+				first->AddStudent(p->getFirstName(), p->getLastName(), p->getCode());
+			}
+			break;
+		}
+	}
+	if (first->getFirstName().compare("") == 0 && first->getCode() == 0
+		&& first->getLastName().compare("") == 0) {
+		return 0;
+	}
+	else {
+		return first;
+	}
+}
+Student * Student::FindName(const std::string &name) {
+	std::string pName = name;
+	NameProcess(pName);
+	Student * first = new Student;
+	Student * p = this;
+	while (true) {
+		if (p->getNext() != 0) {
+			if (IsIn(p->getFirstName(), pName) || IsIn(p->getLastName(), pName)) {
+				first->AddStudent(p->getFirstName(), p->getLastName(), p->getCode());
+			}
+			p = p->getNext();
+		}
+		else {
+			if (IsIn(p->getFirstName(), pName) || IsIn(p->getLastName(), pName)) {
 				first->AddStudent(p->getFirstName(), p->getLastName(), p->getCode());
 			}
 			break;

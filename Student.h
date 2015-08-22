@@ -21,7 +21,7 @@ public:
 	int getCode();
 	void setNext(Student* next);
 	Student * getNext();
-public:
+
 	int AddStudent(std::string &FirstName,std::string &LastName, int code);
 	int AddStudent(const std::string &FirstName,const std::string &LastName, int code);
 	int DeleteStudent(Student * p);
@@ -32,8 +32,10 @@ public:
 	int AddFromFile(std::string &fname);
 	int ImportFromFile(const std::string &fname);
 	int ImportFromFile(std::string &fname);
-	void SortList(int mode);
+	void SortList(int mode = 1);
+
 	Student * FindCode(int code);
-	Student * FindName(std::string name);
+	Student * FindName(std::string &name);
+	Student * FindName(const std::string &name);
 	Student * LastPoint();
 };
