@@ -68,7 +68,7 @@ bool IsIn(std::string &str,std::string &substr) {
 	else {
 		int i = 0;
 		bool isTrue = true;
-		while (i <(int) (str.length()-substr.length())) {
+		while (i <=(int) (str.length()-substr.length())) {
 			isTrue = true;
 			for (int j = 0; j <(int) substr.length(); j++) {
 				if (substr[j] != str[i + j]) {
@@ -85,4 +85,24 @@ bool IsIn(std::string &str,std::string &substr) {
 		}
 		return isTrue;
 	}
+}
+void Seperate(std::string & name, std::string & firstname, std::string & lastname){
+	int i = name.length() - 1;
+	lastname = "";
+	firstname = "";
+	while (name[i] != ' ') {
+		lastname = lastname + name[i];
+		i--;
+		if (i < 0) {
+			break;
+		}
+	}
+	for (i = 0; i < (int)(name.length() - lastname.length() - 1); i++) {
+		firstname = firstname + name[i];
+	}
+	std::string reserver="";
+	for (i =(int) lastname.length() - 1; i >= 0; i--) {
+		reserver = reserver + lastname[i];
+	}
+	lastname = reserver;
 }
