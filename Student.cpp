@@ -206,7 +206,7 @@ int Student::SaveToFile(std::string &fname) {
 		return 0;
 	}
 }
-int Student::AddFromFile(const std::string &fname) {
+int Student::AddFromFile(const std::string &fname, Student * &error) {
 	std::fstream f;
 	f.open(fname, std::ios::in);
 	if (f.fail()) {
@@ -220,13 +220,15 @@ int Student::AddFromFile(const std::string &fname) {
 			std::getline(f, lastname);
 			std::getline(f, scode);
 			code = StringToInt(scode);
-			AddStudent(firstname, lastname, code);
+			if (AddStudent(firstname, lastname, code) != 0) {
+				error->AddStudent(firstname, lastname, code);
+			}
 		}
 	}
 	f.close();
 	return 0;
 }
-int Student::AddFromFile(std::string &fname) {
+int Student::AddFromFile(std::string &fname, Student * &error) {
 	std::fstream f;
 	f.open(fname, std::ios::in);
 	if (f.fail()) {
@@ -240,19 +242,21 @@ int Student::AddFromFile(std::string &fname) {
 			std::getline(f, lastname);
 			std::getline(f, scode);
 			code = StringToInt(scode);
-			AddStudent(firstname, lastname, code);
+			if (AddStudent(firstname, lastname, code) != 0) {
+				error->AddStudent(firstname, lastname, code);
+			}
 		}
 	}
 	f.close();
 	return 0;
 }
-int Student::ImportFromFile(const std::string &fname) {
+int Student::ImportFromFile(const std::string &fname, Student * &error) {
 	Release();
-	return AddFromFile(fname);
+	return AddFromFile(fname, error);
 }
-int Student::ImportFromFile(std::string &fname) {
+int Student::ImportFromFile(std::string &fname, Student * &e) {
 	Release();
-	return AddFromFile(fname);
+	return AddFromFile(fname, e);
 }
 void Student::SortList(int mode) {
 	Student * p = this;

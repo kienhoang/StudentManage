@@ -28,10 +28,10 @@ public:
 	void Release();
 	int SaveToFile(const std::string &fname);
 	int SaveToFile(std::string &fname);
-	int AddFromFile(const std::string &fname);
-	int AddFromFile(std::string &fname);
-	int ImportFromFile(const std::string &fname);
-	int ImportFromFile(std::string &fname);
+	int AddFromFile(const std::string &fname, Student * &error);
+	int AddFromFile(std::string &fname, Student * &error);
+	int ImportFromFile(const std::string &fname, Student * & error );
+	int ImportFromFile(std::string &fname, Student * & error);
 	void SortList(int mode = 1);
 
 	Student * FindCode(int code);
