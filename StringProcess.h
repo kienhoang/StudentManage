@@ -12,4 +12,3 @@ int StringToInt(std::string &s);
 bool IsIn(std::string &str, std::string &substr);
 void Seperate(std::string &name,std::string &firstname,std::string &lastname);
 std::string CharToString(char  ch[]);
-//std::string CharToString(const char  &ch[]);
