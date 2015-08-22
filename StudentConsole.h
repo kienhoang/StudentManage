@@ -24,9 +24,13 @@ protected:
 	void Find_console();
 	void Delete_console();
 	void Edit_console();
+	void PrintErrorList(Student * &error, std::string &fname);
+public:
 	void Save_console();
 	void AddList_console();
+	void AddList_console(char * path);
 	void OpenList_console();
+	void OpenList_console(char * path);
 	void CloseList_console();
 public :
 	void start_console();

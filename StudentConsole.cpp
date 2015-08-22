@@ -104,24 +104,29 @@ void StudentConsole::AddStudent_console() {
 	std::string name = "";
 	std::cout << "Enter name: ";
 	std::getline(std::cin, name);
-	Seperate(name, firstname, lastname);
-	std::cout << "Enter code: ";
-	std::cin >> code;
-	std::cin.ignore(1);
-	switch (this->AddStudent(firstname, lastname, code))
-	{
-	case 0:
-		std::cout << "Done. " << std::endl;
-		isSave_ = false;
-		break;
-	case -1:
-		std::cout << "ERROR: Code is exist." << std::endl;
-		break;
-	case 2:
-		std::cout << "Cannot access memory. Check your memory." << std::endl;
-		break;
-	default:
-		break;
+	if (name.compare("") != 0) {
+		Seperate(name, firstname, lastname);
+		std::cout << "Enter code: ";
+		std::cin >> code;
+		std::cin.ignore(1);
+		switch (this->AddStudent(firstname, lastname, code))
+		{
+		case 0:
+			std::cout << "Done. " << std::endl;
+			isSave_ = false;
+			break;
+		case -1:
+			std::cout << "ERROR: Code is exist." << std::endl;
+			break;
+		case 2:
+			std::cout << "Cannot access memory. Check your memory." << std::endl;
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		std::cout << "Canceled." << std::endl;
 	}
 }
 void StudentConsole::ViewList_console() {
@@ -148,10 +153,12 @@ void StudentConsole::SortList_console() {
 	{
 	case 1:
 		SortList(1);
+		std::cout << "Done." << std::endl;
 		isSave_ = false;
 		break;
 	case 2:
 		SortList(2);
+		std::cout << "Done." << std::endl;
 		isSave_ = false;
 	case 0:
 		break;
@@ -211,8 +218,11 @@ void StudentConsole::Delete_console() {
 		std::cin >> code;
 		std::cin.ignore(1);
 		if (p->FindCode(code) != 0) {
-			DeleteStudent(FindCode(code));
-			std::cout << "Done." << std::endl;
+			Student *q = FindCode(code);
+			std::string tmpname = q->getFirstName() + " " + q->getLastName();
+			int tmpcode = q->getCode();
+			DeleteStudent(q);
+			std::cout << "Deleted " << tmpname << " | " << tmpcode <<"."<< std::endl;
 			isSave_ = false;
 		}
 		else {
@@ -224,8 +234,11 @@ void StudentConsole::Delete_console() {
 		std::cin >> code;
 		std::cin.ignore(1);
 		if (FindCode(code) != 0) {
-			DeleteStudent(FindCode(code));
-			std::cout << "Done." << std::endl;
+			Student *q = FindCode(code);
+			std::string tmpname = q->getFirstName() + " " + q->getLastName();
+			int tmpcode = q->getCode();
+			DeleteStudent(q);
+			std::cout << "Deleted " << tmpname << " | " << tmpcode << "."<<std::endl;
 			isSave_ = false;
 		}
 		else {
@@ -297,6 +310,24 @@ void StudentConsole::Edit_console(){
 		}
 	}
 }
+void StudentConsole::PrintErrorList(Student * &error, std::string &fname){
+	if(error->getFirstName().compare("") != 0 || error->getLastName().compare("") !=0 
+		|| error->getCode() != 0) {
+		std::cout << "**ERROR List on '"<<fname <<"'"<< " Code may be exist on before list :"<< std::endl;
+		while (true) {
+			if (error->getNext() != 0) {
+				std::cout <<"E: "<< error->getFirstName() << " " << error->getLastName() << " | " 
+					<< error->getCode() << std::endl;
+				error = error->getNext();
+			}
+			else {
+				std::cout << "E: " << error->getFirstName() << " " << error->getLastName()
+					<< " | " << error->getCode() << std::endl;
+				break;
+			}
+		}
+	}
+}
 void StudentConsole::Save_console() {
 	std::string fname = "";
 	switch (SaveMenu_console())
@@ -342,10 +373,24 @@ void StudentConsole::Save_console() {
 }
 void StudentConsole::AddList_console() {
 	std::string fname = "";
+	Student * error = new Student;
 	std::cout << "Enter file name to add list: ";
 	std::getline(std::cin, fname);
-	if (AddFromFile(fname) == 0) {
+	if (AddFromFile(fname, error) == 0) {
 		std::cout << "Added List." << std::endl;
+		PrintErrorList(error,fname);
+		isSave_ = false;
+	}
+	else {
+		std::cout << "ERROR: Failed to open file " << fname << std::endl;
+	}
+}
+void StudentConsole::AddList_console(char * path){
+	std::string fname = CharToString(path);
+	Student * error = new Student;
+	if (AddFromFile(fname,error) == 0) {
+		std::cout << "Added List from " << fname << std::endl;
+		PrintErrorList(error,fname);
 		isSave_ = false;
 	}
 	else {
@@ -382,10 +427,26 @@ void StudentConsole::OpenList_console() {
 	}
 	fname_ = "";
 	std::string fname = "";
+	Student * error = new Student;
 	std::cout << "Enter file name to Open: ";
 	std::getline(std::cin, fname);
-	if (ImportFromFile(fname) == 0) {
+	if (ImportFromFile(fname, error) == 0) {
 		std::cout << "Done. Open from " << fname << std::endl;
+		PrintErrorList(error,fname);
+		fname_ = fname;
+		isSave_ = true;
+	}
+	else {
+		std::cout << "ERROR: Fail to open " << fname << std::endl;
+	}
+}
+void StudentConsole::OpenList_console(char * path){
+	fname_ = "";
+	Student * error = new Student;
+	std::string fname = CharToString(path);
+	if (ImportFromFile(fname, error) == 0) {
+		std::cout << "Done. Open from " << fname << std::endl;
+		PrintErrorList(error,fname);
 		fname_ = fname;
 		isSave_ = true;
 	}
