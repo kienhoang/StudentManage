@@ -1,6 +1,15 @@
-﻿Build started 22/08/2015 22:52:55.
+﻿Build started 22/08/2015 23:20:27.
      1>Project "D:\_Project_Program\VS-C++.edu\StudentManage\StudentManage.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         D:\ProgramSetup\VS\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp StringProcess.cpp Student.cpp StudentConsole.cpp
+         StringProcess.cpp
+         Generating Code...
+         Compiling...
+         StudentConsole.cpp
+         Student.cpp
+         Main.cpp
+         Generating Code...
+       Link:
          D:\ProgramSetup\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\_Project_Program\VS-C++.edu\StudentManage\Debug\StudentManage.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\_Project_Program\VS-C++.edu\StudentManage\Debug\StudentManage.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\_Project_Program\VS-C++.edu\StudentManage\Debug\StudentManage.lib" /MACHINE:X86 Debug\Main.obj
          Debug\StringProcess.obj
          Debug\Student.obj
@@ -10,4 +19,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.37
+Time Elapsed 00:00:04.76

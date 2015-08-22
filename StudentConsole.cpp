@@ -1,4 +1,4 @@
-#include "StudentConsole.h"
+﻿#include "StudentConsole.h"
 
 StudentConsole::StudentConsole() {
 	isSave_ = true;
@@ -147,6 +147,9 @@ void StudentConsole::ViewList_console() {
 			}
 		}
 	}
+	fflush(stdin);
+	std::cout << "Press enter key to continue. . .";
+	std::cin.get();
 }
 void StudentConsole::SortList_console() {
 	switch (SortListMenu_console())
@@ -487,6 +490,7 @@ void StudentConsole::CloseList_console() {
 		}
 	}
 	isSave_ = true;
+	fname_ = "";
 	std::cout << "Close." << std::endl;
 	Release();
 }
