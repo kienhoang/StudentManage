@@ -86,6 +86,32 @@ bool IsIn(std::string &str,std::string &substr) {
 		return isTrue;
 	}
 }
+bool IsIn(const std::string &str,const std::string &substr) {
+	if (substr.length() > str.length()) {
+		return false;
+	}
+	else {
+		int i = 0;
+		bool isTrue = true;
+		while (i <=(int) (str.length()-substr.length())) {
+			isTrue = true;
+			for (int j = 0; j <(int) substr.length(); j++) {
+				if (substr[j] != str[i + j]) {
+					isTrue = false;
+					break;
+				}
+			}
+			if (isTrue) {
+				break;
+			}
+			else {
+				i++;
+			}
+		}
+		return isTrue;
+	}
+}
+
 void Seperate(std::string & name, std::string & firstname, std::string & lastname){
 	int i = name.length() - 1;
 	lastname = "";

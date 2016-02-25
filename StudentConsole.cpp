@@ -466,6 +466,7 @@ void StudentConsole::CloseList_console() {
 		case 'y':
 		case 'Y':
 			if (fname_.compare("") == 0) {
+				std::cin.ignore(1);
 				std::cout << "Enter file name to save: ";
 				std::getline(std::cin, fname);
 				if (SaveToFile(fname) == 0) {

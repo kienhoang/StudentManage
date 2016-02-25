@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1440211038 source:d:\_project_program\vs-c++.edu\studentmanage\main.cpp
+	<iostream>
+	"StudentConsole.h"
+
+1440211038 d:\_project_program\vs-c++.edu\studentmanage\studentconsole.h
+	"Student.h"
+	<iostream>
+
+1455869755 d:\_project_program\vs-c++.edu\studentmanage\student.h
+	<string>
+	<fstream>
+	"StringProcess.h"
+
+1441018887 d:\_project_program\vs-c++.edu\studentmanage\stringprocess.h
+	<string>
+	<stdlib.h>
+
+1441018993 source:d:\_project_program\vs-c++.edu\studentmanage\stringprocess.cpp
+	"StringProcess.h"
+
+1455869693 source:d:\_project_program\vs-c++.edu\studentmanage\student.cpp
+	"Student.h"
+
+1441020151 source:d:\_project_program\vs-c++.edu\studentmanage\studentconsole.cpp
+
